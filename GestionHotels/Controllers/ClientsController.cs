@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -48,14 +49,22 @@ namespace GestionHotels.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "idCl,nom,prenom,email,cin,tel,mdp")] Client client)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Client.Add(client);
-                db.SaveChanges();
+                // TODO: Add insert logic here
+                using (HotelsDataBaseEntities db = new HotelsDataBaseEntities())
+                {
+                    db.Client.Add(client);
+                    db.SaveChanges();
+                }
+
                 return RedirectToAction("Index");
             }
-
-            return View(client);
+            catch
+            {
+                return View();
+            }
+           
         }
 
         // GET: Clients/Edit/5

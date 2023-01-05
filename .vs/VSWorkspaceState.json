@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\GestionHotels",
+    "\\GestionHotels\\Controllers",
+    "\\GestionHotels\\Models",
+    "\\GestionHotels\\Views",
+    "\\GestionHotels\\Views\\Admins"
+  ],
+  "SelectedNode": "\\GestionHotels\\Views\\Admins\\Details.cshtml",
+  "PreviewInSolutionExplorer": false
+}
