@@ -1,0 +1,42 @@
+﻿@model GestionHotels.Models.Commentaire
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Commentaire</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.comm)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.comm)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Client.nom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Client.nom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hotel.adresse)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hotel.adresse)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,48 @@
+﻿@model GestionHotels.Models.Facture
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Facture</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.dateFact)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dateFact)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.reservation.idRes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.reservation.idRes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.servicee.descriptions)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.servicee.descriptions)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,45 @@
+﻿@model IEnumerable<GestionHotels.Models.Commentaire>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.comm)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Client.nom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Hotel.adresse)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.comm)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Client.nom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hotel.adresse)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

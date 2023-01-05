@@ -1,0 +1,42 @@
+﻿@model GestionHotels.Models.Facture
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Facture</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.dateFact)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dateFact)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.reservation.idRes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.reservation.idRes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.servicee.descriptions)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.servicee.descriptions)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idFact }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

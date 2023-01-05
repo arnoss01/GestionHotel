@@ -1,0 +1,45 @@
+﻿@model IEnumerable<GestionHotels.Models.Facture>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.dateFact)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.reservation.idRes)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.servicee.descriptions)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.dateFact)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.reservation.idRes)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.servicee.descriptions)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.idFact }) |
+            @Html.ActionLink("Details", "Details", new { id=item.idFact }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.idFact })
+        </td>
+    </tr>
+}
+
+</table>
