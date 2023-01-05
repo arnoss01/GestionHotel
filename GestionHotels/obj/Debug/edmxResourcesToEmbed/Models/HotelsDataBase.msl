@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="HotelsDataBaseModelStoreContainer" CdmEntityContainer="HotelsDataBaseEntities">
+    <EntitySetMapping Name="Admins">
+      <EntityTypeMapping TypeName="HotelsDataBaseModel.Admins">
+        <MappingFragment StoreEntitySet="Admins">
+          <ScalarProperty Name="idAdm" ColumnName="idAdm" />
+          <ScalarProperty Name="nom" ColumnName="nom" />
+          <ScalarProperty Name="prenom" ColumnName="prenom" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="cin" ColumnName="cin" />
+          <ScalarProperty Name="tel" ColumnName="tel" />
+          <ScalarProperty Name="mdp" ColumnName="mdp" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="chambre">
+      <EntityTypeMapping TypeName="HotelsDataBaseModel.chambre">
+        <MappingFragment StoreEntitySet="chambre">
+          <ScalarProperty Name="numChamb" ColumnName="numChamb" />
+          <ScalarProperty Name="etat" ColumnName="etat" />
+          <ScalarProperty Name="idHot" ColumnName="idHot" />
+          <ScalarProperty Name="idRes" ColumnName="idRes" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Client">
+      <EntityTypeMapping TypeName="HotelsDataBaseModel.Client">
+        <MappingFragment StoreEntitySet="Client">
+          <ScalarProperty Name="idCl" ColumnName="idCl" />
+          <ScalarProperty Name="nom" ColumnName="nom" />
+          <ScalarProperty Name="prenom" ColumnName="prenom" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="cin" ColumnName="cin" />
+          <ScalarProperty Name="tel" ColumnName="tel" />
+          <ScalarProperty Name="mdp" ColumnName="mdp" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Commentaire">
+      <EntityTypeMapping TypeName="HotelsDataBaseModel.Commentaire">
+        <MappingFragment StoreEntitySet="Commentaire">
+          <ScalarProperty Name="idCl" ColumnName="idCl" />
+          <ScalarProperty Name="idHot" ColumnName="idHot" />
+          <ScalarProperty Name="comm" ColumnName="comm" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Hotel">
+      <EntityTypeMapping TypeName="HotelsDataBaseModel.Hotel">
+        <MappingFragment StoreEntitySet="Hotel">
+          <ScalarProperty Name="idHot" ColumnName="idHot" />
+          <ScalarProperty Name="adresse" ColumnName="adresse" />
+          <ScalarProperty Name="numTel" ColumnName="numTel" />
+          <ScalarProperty Name="ville" ColumnName="ville" />
+          <ScalarProperty Name="idAdm" ColumnName="idAdm" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="reservation">
+      <EntityTypeMapping TypeName="HotelsDataBaseModel.reservation">
+        <MappingFragment StoreEntitySet="reservation">
+          <ScalarProperty Name="idRes" ColumnName="idRes" />
+          <ScalarProperty Name="dateRes" ColumnName="dateRes" />
+          <ScalarProperty Name="dateDebutRes" ColumnName="dateDebutRes" />
+          <ScalarProperty Name="dateFinRes" ColumnName="dateFinRes" />
+          <ScalarProperty Name="idCl" ColumnName="idCl" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="servicee">
+      <EntityTypeMapping TypeName="HotelsDataBaseModel.servicee">
+        <MappingFragment StoreEntitySet="servicee">
+          <ScalarProperty Name="idSer" ColumnName="idSer" />
+          <ScalarProperty Name="descriptions" ColumnName="descriptions" />
+          <ScalarProperty Name="prix" ColumnName="prix" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="HotelsDataBaseModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Facture">
+      <EntityTypeMapping TypeName="HotelsDataBaseModel.Facture">
+        <MappingFragment StoreEntitySet="Facture">
+          <ScalarProperty Name="idFact" ColumnName="idFact" />
+          <ScalarProperty Name="dateFact" ColumnName="dateFact" />
+          <ScalarProperty Name="idRes" ColumnName="idRes" />
+          <ScalarProperty Name="idSer" ColumnName="idSer" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="images">
+      <EntityTypeMapping TypeName="HotelsDataBaseModel.images">
+        <MappingFragment StoreEntitySet="images">
+          <ScalarProperty Name="idImg" ColumnName="idImg" />
+          <ScalarProperty Name="img" ColumnName="img" />
+          <ScalarProperty Name="idHot" ColumnName="idHot" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
