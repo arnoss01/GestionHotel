@@ -12,16 +12,15 @@ namespace GestionHotels.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Client
+    public partial class Admins
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Client()
+        public Admins()
         {
-            this.Commentaire = new HashSet<Commentaire>();
-            this.reservation = new HashSet<reservation>();
+            this.Hotel = new HashSet<Hotel>();
         }
     
-        public int idCl { get; set; }
+        public int idAdm { get; set; }
         public string nom { get; set; }
         public string prenom { get; set; }
         public string email { get; set; }
@@ -30,8 +29,6 @@ namespace GestionHotels.Models
         public string mdp { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Commentaire> Commentaire { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<reservation> reservation { get; set; }
+        public virtual ICollection<Hotel> Hotel { get; set; }
     }
 }

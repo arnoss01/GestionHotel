@@ -12,14 +12,13 @@ namespace GestionHotels.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Facture
+    public partial class Commentaire
     {
-        public int idFact { get; set; }
-        public Nullable<System.DateTime> dateFact { get; set; }
-        public Nullable<int> idRes { get; set; }
-        public Nullable<int> idSer { get; set; }
+        public int idCl { get; set; }
+        public int idHot { get; set; }
+        public string comm { get; set; }
     
-        public virtual reservation reservation { get; set; }
-        public virtual servicee servicee { get; set; }
+        public virtual Client Client { get; set; }
+        public virtual Hotel Hotel { get; set; }
     }
 }

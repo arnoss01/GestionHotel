@@ -1,0 +1,689 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="HotelsDataBaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admins">
+          <Key>
+            <PropertyRef Name="idAdm" />
+          </Key>
+          <Property Name="idAdm" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="prenom" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="cin" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="tel" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="mdp" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="chambre">
+          <Key>
+            <PropertyRef Name="numChamb" />
+          </Key>
+          <Property Name="numChamb" Type="int" Nullable="false" />
+          <Property Name="etat" Type="varchar" MaxLength="50" />
+          <Property Name="idHot" Type="int" />
+          <Property Name="idRes" Type="int" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="idCl" />
+          </Key>
+          <Property Name="idCl" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="prenom" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="cin" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="tel" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="mdp" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Commentaire">
+          <Key>
+            <PropertyRef Name="idCl" />
+            <PropertyRef Name="idHot" />
+          </Key>
+          <Property Name="idCl" Type="int" Nullable="false" />
+          <Property Name="idHot" Type="int" Nullable="false" />
+          <Property Name="comm" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HotelsDataBase.dbo.Facture' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Facture">
+          <Key>
+            <PropertyRef Name="idFact" />
+          </Key>
+          <Property Name="idFact" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dateFact" Type="datetime" />
+          <Property Name="idRes" Type="int" />
+          <Property Name="idSer" Type="int" />
+        </EntityType>
+        <EntityType Name="Hotel">
+          <Key>
+            <PropertyRef Name="idHot" />
+          </Key>
+          <Property Name="idHot" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="adresse" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="numTel" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="ville" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="idAdm" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HotelsDataBase.dbo.images' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="images">
+          <Key>
+            <PropertyRef Name="idImg" />
+          </Key>
+          <Property Name="idImg" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="img" Type="varbinary(max)" />
+          <Property Name="idHot" Type="int" />
+        </EntityType>
+        <EntityType Name="reservation">
+          <Key>
+            <PropertyRef Name="idRes" />
+          </Key>
+          <Property Name="idRes" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dateRes" Type="datetime" Nullable="false" />
+          <Property Name="dateDebutRes" Type="datetime" Nullable="false" />
+          <Property Name="dateFinRes" Type="datetime" Nullable="false" />
+          <Property Name="idCl" Type="int" />
+        </EntityType>
+        <EntityType Name="servicee">
+          <Key>
+            <PropertyRef Name="idSer" />
+          </Key>
+          <Property Name="idSer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descriptions" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="prix" Type="float" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK__chambre__idHot__33D4B598">
+          <End Role="Hotel" Type="Self.Hotel" Multiplicity="0..1" />
+          <End Role="chambre" Type="Self.chambre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hotel">
+              <PropertyRef Name="idHot" />
+            </Principal>
+            <Dependent Role="chambre">
+              <PropertyRef Name="idHot" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__chambre__idRes__34C8D9D1">
+          <End Role="reservation" Type="Self.reservation" Multiplicity="0..1" />
+          <End Role="chambre" Type="Self.chambre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="reservation">
+              <PropertyRef Name="idRes" />
+            </Principal>
+            <Dependent Role="chambre">
+              <PropertyRef Name="idRes" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Commentai__idHot__30F848ED">
+          <End Role="Hotel" Type="Self.Hotel" Multiplicity="1" />
+          <End Role="Commentaire" Type="Self.Commentaire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hotel">
+              <PropertyRef Name="idHot" />
+            </Principal>
+            <Dependent Role="Commentaire">
+              <PropertyRef Name="idHot" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Commentair__idCl__300424B4">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Commentaire" Type="Self.Commentaire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="idCl" />
+            </Principal>
+            <Dependent Role="Commentaire">
+              <PropertyRef Name="idCl" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Facture__idRes__398D8EEE">
+          <End Role="reservation" Type="Self.reservation" Multiplicity="0..1" />
+          <End Role="Facture" Type="Self.Facture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="reservation">
+              <PropertyRef Name="idRes" />
+            </Principal>
+            <Dependent Role="Facture">
+              <PropertyRef Name="idRes" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Facture__idSer__3A81B327">
+          <End Role="servicee" Type="Self.servicee" Multiplicity="0..1" />
+          <End Role="Facture" Type="Self.Facture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="servicee">
+              <PropertyRef Name="idSer" />
+            </Principal>
+            <Dependent Role="Facture">
+              <PropertyRef Name="idSer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Hotel__idAdm__2B3F6F97">
+          <End Role="Admins" Type="Self.Admins" Multiplicity="0..1" />
+          <End Role="Hotel" Type="Self.Hotel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Admins">
+              <PropertyRef Name="idAdm" />
+            </Principal>
+            <Dependent Role="Hotel">
+              <PropertyRef Name="idAdm" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__images__idHot__2D27B809">
+          <End Role="Hotel" Type="Self.Hotel" Multiplicity="0..1" />
+          <End Role="images" Type="Self.images" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hotel">
+              <PropertyRef Name="idHot" />
+            </Principal>
+            <Dependent Role="images">
+              <PropertyRef Name="idHot" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__reservatio__idCl__286302EC">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="reservation" Type="Self.reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="idCl" />
+            </Principal>
+            <Dependent Role="reservation">
+              <PropertyRef Name="idCl" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HotelsDataBaseModelStoreContainer">
+          <EntitySet Name="Admins" EntityType="Self.Admins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="chambre" EntityType="Self.chambre" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Commentaire" EntityType="Self.Commentaire" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Hotel" EntityType="Self.Hotel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="reservation" EntityType="Self.reservation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="servicee" EntityType="Self.servicee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Facture" EntityType="Self.Facture" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Facture].[idFact] AS [idFact], 
+    [Facture].[dateFact] AS [dateFact], 
+    [Facture].[idRes] AS [idRes], 
+    [Facture].[idSer] AS [idSer]
+    FROM [dbo].[Facture] AS [Facture]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="images" EntityType="Self.images" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [images].[idImg] AS [idImg], 
+    [images].[img] AS [img], 
+    [images].[idHot] AS [idHot]
+    FROM [dbo].[images] AS [images]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__chambre__idHot__33D4B598" Association="Self.FK__chambre__idHot__33D4B598">
+            <End Role="Hotel" EntitySet="Hotel" />
+            <End Role="chambre" EntitySet="chambre" />
+          </AssociationSet>
+          <AssociationSet Name="FK__chambre__idRes__34C8D9D1" Association="Self.FK__chambre__idRes__34C8D9D1">
+            <End Role="reservation" EntitySet="reservation" />
+            <End Role="chambre" EntitySet="chambre" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Commentai__idHot__30F848ED" Association="Self.FK__Commentai__idHot__30F848ED">
+            <End Role="Hotel" EntitySet="Hotel" />
+            <End Role="Commentaire" EntitySet="Commentaire" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Commentair__idCl__300424B4" Association="Self.FK__Commentair__idCl__300424B4">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Commentaire" EntitySet="Commentaire" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Facture__idRes__398D8EEE" Association="Self.FK__Facture__idRes__398D8EEE">
+            <End Role="reservation" EntitySet="reservation" />
+            <End Role="Facture" EntitySet="Facture" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Facture__idSer__3A81B327" Association="Self.FK__Facture__idSer__3A81B327">
+            <End Role="servicee" EntitySet="servicee" />
+            <End Role="Facture" EntitySet="Facture" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Hotel__idAdm__2B3F6F97" Association="Self.FK__Hotel__idAdm__2B3F6F97">
+            <End Role="Admins" EntitySet="Admins" />
+            <End Role="Hotel" EntitySet="Hotel" />
+          </AssociationSet>
+          <AssociationSet Name="FK__images__idHot__2D27B809" Association="Self.FK__images__idHot__2D27B809">
+            <End Role="Hotel" EntitySet="Hotel" />
+            <End Role="images" EntitySet="images" />
+          </AssociationSet>
+          <AssociationSet Name="FK__reservatio__idCl__286302EC" Association="Self.FK__reservatio__idCl__286302EC">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="reservation" EntitySet="reservation" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HotelsDataBaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Admins">
+          <Key>
+            <PropertyRef Name="idAdm" />
+          </Key>
+          <Property Name="idAdm" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="prenom" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cin" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tel" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="mdp" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Hotel" Relationship="Self.FK__Hotel__idAdm__2B3F6F97" FromRole="Admins" ToRole="Hotel" />
+        </EntityType>
+        <EntityType Name="chambre">
+          <Key>
+            <PropertyRef Name="numChamb" />
+          </Key>
+          <Property Name="numChamb" Type="Int32" Nullable="false" />
+          <Property Name="etat" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="idHot" Type="Int32" />
+          <Property Name="idRes" Type="Int32" />
+          <NavigationProperty Name="Hotel" Relationship="Self.FK__chambre__idHot__33D4B598" FromRole="chambre" ToRole="Hotel" />
+          <NavigationProperty Name="reservation" Relationship="Self.FK__chambre__idRes__34C8D9D1" FromRole="chambre" ToRole="reservation" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="idCl" />
+          </Key>
+          <Property Name="idCl" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="prenom" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cin" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tel" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="mdp" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Commentaire" Relationship="Self.FK__Commentair__idCl__300424B4" FromRole="Client" ToRole="Commentaire" />
+          <NavigationProperty Name="reservation" Relationship="Self.FK__reservatio__idCl__286302EC" FromRole="Client" ToRole="reservation" />
+        </EntityType>
+        <EntityType Name="Commentaire">
+          <Key>
+            <PropertyRef Name="idCl" />
+            <PropertyRef Name="idHot" />
+          </Key>
+          <Property Name="idCl" Type="Int32" Nullable="false" />
+          <Property Name="idHot" Type="Int32" Nullable="false" />
+          <Property Name="comm" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Client" Relationship="Self.FK__Commentair__idCl__300424B4" FromRole="Commentaire" ToRole="Client" />
+          <NavigationProperty Name="Hotel" Relationship="Self.FK__Commentai__idHot__30F848ED" FromRole="Commentaire" ToRole="Hotel" />
+        </EntityType>
+        <EntityType Name="Hotel">
+          <Key>
+            <PropertyRef Name="idHot" />
+          </Key>
+          <Property Name="idHot" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="adresse" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="numTel" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ville" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="idAdm" Type="Int32" />
+          <NavigationProperty Name="Admins" Relationship="Self.FK__Hotel__idAdm__2B3F6F97" FromRole="Hotel" ToRole="Admins" />
+          <NavigationProperty Name="chambre" Relationship="Self.FK__chambre__idHot__33D4B598" FromRole="Hotel" ToRole="chambre" />
+          <NavigationProperty Name="Commentaire" Relationship="Self.FK__Commentai__idHot__30F848ED" FromRole="Hotel" ToRole="Commentaire" />
+          <NavigationProperty Name="images" Relationship="Self.FK__images__idHot__2D27B809" FromRole="Hotel" ToRole="images" />
+        </EntityType>
+        <EntityType Name="reservation">
+          <Key>
+            <PropertyRef Name="idRes" />
+          </Key>
+          <Property Name="idRes" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dateRes" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="dateDebutRes" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="dateFinRes" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="idCl" Type="Int32" />
+          <NavigationProperty Name="chambre" Relationship="Self.FK__chambre__idRes__34C8D9D1" FromRole="reservation" ToRole="chambre" />
+          <NavigationProperty Name="Client" Relationship="Self.FK__reservatio__idCl__286302EC" FromRole="reservation" ToRole="Client" />
+          <NavigationProperty Name="Facture" Relationship="Self.FK__Facture__idRes__398D8EEE" FromRole="reservation" ToRole="Facture" />
+        </EntityType>
+        <EntityType Name="servicee">
+          <Key>
+            <PropertyRef Name="idSer" />
+          </Key>
+          <Property Name="idSer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descriptions" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="prix" Type="Double" />
+          <NavigationProperty Name="Facture" Relationship="Self.FK__Facture__idSer__3A81B327" FromRole="servicee" ToRole="Facture" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Facture">
+          <Key>
+            <PropertyRef Name="idFact" />
+          </Key>
+          <Property Name="idFact" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dateFact" Type="DateTime" Precision="3" />
+          <Property Name="idRes" Type="Int32" />
+          <Property Name="idSer" Type="Int32" />
+          <NavigationProperty Name="reservation" Relationship="Self.FK__Facture__idRes__398D8EEE" FromRole="Facture" ToRole="reservation" />
+          <NavigationProperty Name="servicee" Relationship="Self.FK__Facture__idSer__3A81B327" FromRole="Facture" ToRole="servicee" />
+        </EntityType>
+        <EntityType Name="images">
+          <Key>
+            <PropertyRef Name="idImg" />
+          </Key>
+          <Property Name="idImg" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="img" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="idHot" Type="Int32" />
+          <NavigationProperty Name="Hotel" Relationship="Self.FK__images__idHot__2D27B809" FromRole="images" ToRole="Hotel" />
+        </EntityType>
+        <Association Name="FK__Hotel__idAdm__2B3F6F97">
+          <End Role="Admins" Type="Self.Admins" Multiplicity="0..1" />
+          <End Role="Hotel" Type="Self.Hotel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Admins">
+              <PropertyRef Name="idAdm" />
+            </Principal>
+            <Dependent Role="Hotel">
+              <PropertyRef Name="idAdm" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__chambre__idHot__33D4B598">
+          <End Role="Hotel" Type="Self.Hotel" Multiplicity="0..1" />
+          <End Role="chambre" Type="Self.chambre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hotel">
+              <PropertyRef Name="idHot" />
+            </Principal>
+            <Dependent Role="chambre">
+              <PropertyRef Name="idHot" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__chambre__idRes__34C8D9D1">
+          <End Role="reservation" Type="Self.reservation" Multiplicity="0..1" />
+          <End Role="chambre" Type="Self.chambre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="reservation">
+              <PropertyRef Name="idRes" />
+            </Principal>
+            <Dependent Role="chambre">
+              <PropertyRef Name="idRes" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Commentair__idCl__300424B4">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Commentaire" Type="Self.Commentaire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="idCl" />
+            </Principal>
+            <Dependent Role="Commentaire">
+              <PropertyRef Name="idCl" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__reservatio__idCl__286302EC">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="reservation" Type="Self.reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="idCl" />
+            </Principal>
+            <Dependent Role="reservation">
+              <PropertyRef Name="idCl" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Commentai__idHot__30F848ED">
+          <End Role="Hotel" Type="Self.Hotel" Multiplicity="1" />
+          <End Role="Commentaire" Type="Self.Commentaire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hotel">
+              <PropertyRef Name="idHot" />
+            </Principal>
+            <Dependent Role="Commentaire">
+              <PropertyRef Name="idHot" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__images__idHot__2D27B809">
+          <End Role="Hotel" Type="Self.Hotel" Multiplicity="0..1" />
+          <End Role="images" Type="Self.images" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hotel">
+              <PropertyRef Name="idHot" />
+            </Principal>
+            <Dependent Role="images">
+              <PropertyRef Name="idHot" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Facture__idRes__398D8EEE">
+          <End Role="reservation" Type="Self.reservation" Multiplicity="0..1" />
+          <End Role="Facture" Type="Self.Facture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="reservation">
+              <PropertyRef Name="idRes" />
+            </Principal>
+            <Dependent Role="Facture">
+              <PropertyRef Name="idRes" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Facture__idSer__3A81B327">
+          <End Role="servicee" Type="Self.servicee" Multiplicity="0..1" />
+          <End Role="Facture" Type="Self.Facture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="servicee">
+              <PropertyRef Name="idSer" />
+            </Principal>
+            <Dependent Role="Facture">
+              <PropertyRef Name="idSer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HotelsDataBaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admins" EntityType="Self.Admins" />
+          <EntitySet Name="chambre" EntityType="Self.chambre" />
+          <EntitySet Name="Client" EntityType="Self.Client" />
+          <EntitySet Name="Commentaire" EntityType="Self.Commentaire" />
+          <EntitySet Name="Hotel" EntityType="Self.Hotel" />
+          <EntitySet Name="reservation" EntityType="Self.reservation" />
+          <EntitySet Name="servicee" EntityType="Self.servicee" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Facture" EntityType="Self.Facture" />
+          <EntitySet Name="images" EntityType="Self.images" />
+          <AssociationSet Name="FK__Hotel__idAdm__2B3F6F97" Association="Self.FK__Hotel__idAdm__2B3F6F97">
+            <End Role="Admins" EntitySet="Admins" />
+            <End Role="Hotel" EntitySet="Hotel" />
+          </AssociationSet>
+          <AssociationSet Name="FK__chambre__idHot__33D4B598" Association="Self.FK__chambre__idHot__33D4B598">
+            <End Role="Hotel" EntitySet="Hotel" />
+            <End Role="chambre" EntitySet="chambre" />
+          </AssociationSet>
+          <AssociationSet Name="FK__chambre__idRes__34C8D9D1" Association="Self.FK__chambre__idRes__34C8D9D1">
+            <End Role="reservation" EntitySet="reservation" />
+            <End Role="chambre" EntitySet="chambre" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Commentair__idCl__300424B4" Association="Self.FK__Commentair__idCl__300424B4">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Commentaire" EntitySet="Commentaire" />
+          </AssociationSet>
+          <AssociationSet Name="FK__reservatio__idCl__286302EC" Association="Self.FK__reservatio__idCl__286302EC">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="reservation" EntitySet="reservation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Commentai__idHot__30F848ED" Association="Self.FK__Commentai__idHot__30F848ED">
+            <End Role="Hotel" EntitySet="Hotel" />
+            <End Role="Commentaire" EntitySet="Commentaire" />
+          </AssociationSet>
+          <AssociationSet Name="FK__images__idHot__2D27B809" Association="Self.FK__images__idHot__2D27B809">
+            <End Role="Hotel" EntitySet="Hotel" />
+            <End Role="images" EntitySet="images" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Facture__idRes__398D8EEE" Association="Self.FK__Facture__idRes__398D8EEE">
+            <End Role="reservation" EntitySet="reservation" />
+            <End Role="Facture" EntitySet="Facture" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Facture__idSer__3A81B327" Association="Self.FK__Facture__idSer__3A81B327">
+            <End Role="servicee" EntitySet="servicee" />
+            <End Role="Facture" EntitySet="Facture" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HotelsDataBaseModelStoreContainer" CdmEntityContainer="HotelsDataBaseEntities">
+          <EntitySetMapping Name="Admins">
+            <EntityTypeMapping TypeName="HotelsDataBaseModel.Admins">
+              <MappingFragment StoreEntitySet="Admins">
+                <ScalarProperty Name="idAdm" ColumnName="idAdm" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="prenom" ColumnName="prenom" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="cin" ColumnName="cin" />
+                <ScalarProperty Name="tel" ColumnName="tel" />
+                <ScalarProperty Name="mdp" ColumnName="mdp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="chambre">
+            <EntityTypeMapping TypeName="HotelsDataBaseModel.chambre">
+              <MappingFragment StoreEntitySet="chambre">
+                <ScalarProperty Name="numChamb" ColumnName="numChamb" />
+                <ScalarProperty Name="etat" ColumnName="etat" />
+                <ScalarProperty Name="idHot" ColumnName="idHot" />
+                <ScalarProperty Name="idRes" ColumnName="idRes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Client">
+            <EntityTypeMapping TypeName="HotelsDataBaseModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="idCl" ColumnName="idCl" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="prenom" ColumnName="prenom" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="cin" ColumnName="cin" />
+                <ScalarProperty Name="tel" ColumnName="tel" />
+                <ScalarProperty Name="mdp" ColumnName="mdp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Commentaire">
+            <EntityTypeMapping TypeName="HotelsDataBaseModel.Commentaire">
+              <MappingFragment StoreEntitySet="Commentaire">
+                <ScalarProperty Name="idCl" ColumnName="idCl" />
+                <ScalarProperty Name="idHot" ColumnName="idHot" />
+                <ScalarProperty Name="comm" ColumnName="comm" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Hotel">
+            <EntityTypeMapping TypeName="HotelsDataBaseModel.Hotel">
+              <MappingFragment StoreEntitySet="Hotel">
+                <ScalarProperty Name="idHot" ColumnName="idHot" />
+                <ScalarProperty Name="adresse" ColumnName="adresse" />
+                <ScalarProperty Name="numTel" ColumnName="numTel" />
+                <ScalarProperty Name="ville" ColumnName="ville" />
+                <ScalarProperty Name="idAdm" ColumnName="idAdm" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="reservation">
+            <EntityTypeMapping TypeName="HotelsDataBaseModel.reservation">
+              <MappingFragment StoreEntitySet="reservation">
+                <ScalarProperty Name="idRes" ColumnName="idRes" />
+                <ScalarProperty Name="dateRes" ColumnName="dateRes" />
+                <ScalarProperty Name="dateDebutRes" ColumnName="dateDebutRes" />
+                <ScalarProperty Name="dateFinRes" ColumnName="dateFinRes" />
+                <ScalarProperty Name="idCl" ColumnName="idCl" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="servicee">
+            <EntityTypeMapping TypeName="HotelsDataBaseModel.servicee">
+              <MappingFragment StoreEntitySet="servicee">
+                <ScalarProperty Name="idSer" ColumnName="idSer" />
+                <ScalarProperty Name="descriptions" ColumnName="descriptions" />
+                <ScalarProperty Name="prix" ColumnName="prix" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="HotelsDataBaseModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Facture">
+            <EntityTypeMapping TypeName="HotelsDataBaseModel.Facture">
+              <MappingFragment StoreEntitySet="Facture">
+                <ScalarProperty Name="idFact" ColumnName="idFact" />
+                <ScalarProperty Name="dateFact" ColumnName="dateFact" />
+                <ScalarProperty Name="idRes" ColumnName="idRes" />
+                <ScalarProperty Name="idSer" ColumnName="idSer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="images">
+            <EntityTypeMapping TypeName="HotelsDataBaseModel.images">
+              <MappingFragment StoreEntitySet="images">
+                <ScalarProperty Name="idImg" ColumnName="idImg" />
+                <ScalarProperty Name="img" ColumnName="img" />
+                <ScalarProperty Name="idHot" ColumnName="idHot" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

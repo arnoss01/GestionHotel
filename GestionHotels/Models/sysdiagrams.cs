@@ -12,14 +12,12 @@ namespace GestionHotels.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Facture
+    public partial class sysdiagrams
     {
-        public int idFact { get; set; }
-        public Nullable<System.DateTime> dateFact { get; set; }
-        public Nullable<int> idRes { get; set; }
-        public Nullable<int> idSer { get; set; }
-    
-        public virtual reservation reservation { get; set; }
-        public virtual servicee servicee { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

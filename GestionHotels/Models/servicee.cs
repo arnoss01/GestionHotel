@@ -12,26 +12,19 @@ namespace GestionHotels.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Client
+    public partial class servicee
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Client()
+        public servicee()
         {
-            this.Commentaire = new HashSet<Commentaire>();
-            this.reservation = new HashSet<reservation>();
+            this.Facture = new HashSet<Facture>();
         }
     
-        public int idCl { get; set; }
-        public string nom { get; set; }
-        public string prenom { get; set; }
-        public string email { get; set; }
-        public string cin { get; set; }
-        public string tel { get; set; }
-        public string mdp { get; set; }
+        public int idSer { get; set; }
+        public string descriptions { get; set; }
+        public Nullable<double> prix { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Commentaire> Commentaire { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<reservation> reservation { get; set; }
+        public virtual ICollection<Facture> Facture { get; set; }
     }
 }
